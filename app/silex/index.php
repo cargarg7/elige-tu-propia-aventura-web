@@ -53,7 +53,7 @@ $app->get('/page/{id}', function ($id) use ($app) {
     $usecase = new \Etpa\UseCases\Page\ViewPageUseCase($pageRepository);
     $response = $usecase->viewPage($request);
 
-    return $app['twig']->render('view-page.html.twig', ['response' => $response]);
+    return $app['twig']->render('view-page.html.twig', ['page' => $response->page]);
 });
 
 $app->get('/story/add', function () use ($app) {
