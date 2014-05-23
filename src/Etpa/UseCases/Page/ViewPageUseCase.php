@@ -51,10 +51,19 @@ class ViewPageUseCase
             throw new PageRepositoryNotAvailableException();
         }
 
+        $this->checkIfExists($page);
+
+        return $page;
+    }
+
+    /**
+     * @param $page
+     * @throws PageDoesNotExistException
+     */
+    private function checkIfExists($page)
+    {
         if (!$page) {
             throw new PageDoesNotExistException();
         }
-
-        return $page;
     }
 }

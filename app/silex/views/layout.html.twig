@@ -8,9 +8,7 @@
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/css/cover.css">
+    <link rel="stylesheet" href="/components/flat-ui-official/bootstrap/css/bootstrap.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,7 +27,8 @@
                         <ul class="nav masthead-nav">
                             <li class="active"><a href="{{ path('home') }}">Home</a></li>
                             <li><a href="{{ path('read') }}">Read</a></li>
-                            <li><a href="#">Write</a></li>
+                            <li><a href="{{ path('add-story') }}">Write</a></li>
+                            <li><a href="{{ path('signup') }}">Sign up</a></li>
                         </ul>
                     </div>
                 </div>
@@ -41,7 +40,7 @@
                         </p>
                         <p class="lead">
                             <a href="{{ path('read') }}" class="btn btn-lg btn-default">Read</a>
-                            <a href="#" class="btn btn-lg btn-default">Write</a>
+                            <a href="{{ path('add-story') }}" class="btn btn-lg btn-default">Write</a>
                         </p>
                     {% endblock %}
                 </div>

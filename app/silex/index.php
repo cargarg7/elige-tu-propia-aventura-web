@@ -1,6 +1,7 @@
 <?php
 
 use Etpa\Infraestructure\Persistence\Doctrine\EntityManagerFactory;
+use Symfony\Component\HttpFoundation\Request;
 
 $filename = __DIR__.preg_replace('#(\?.*)$#', '', $_SERVER['REQUEST_URI']);
 if (php_sapi_name() === 'cli-server' && is_file($filename)) {
@@ -34,6 +35,33 @@ $app->get('/stories', function () use ($app) {
     return $app['twig']->render('view-stories.html.twig', ['stories' => $response->stories]);
 })->bind('read');
 
+
+$app->get('/signup', function () use ($app) {
+    return $app['twig']->render('signup.html.twig');
+})->bind('signup');
+
+$app->post('/signup', function () use ($app) {
+
+
+    return $app['twig']->render('signup.html.twig');
+});
+
+$app->get('/story/add', function () use ($app) {
+    return $app['twig']->render('add-story.html.twig');
+})->bind('add-story');
+
+$app->post('/story/add', function (Request $httpRequest) use ($app) {
+    $request = new \Etpa\UseCases\Story\CreateStoryRequest();
+    $request->title = $httpRequest->get('title');
+    $request->description = $httpRequest->get('description');
+
+    $storyRepository = $app['em']->getRepository('Etpa\Domain\Story');
+    $usecase = new \Etpa\UseCases\Story\CreateStoryUseCase($storyRepository);
+    $response = $usecase->createStory($request);
+
+    return $app->redirect('/stories');
+});
+
 $app->get('/story/{id}', function ($id) use ($app) {
     $request = new \Etpa\UseCases\Story\ViewStoryRequest();
     $request->storyId = $id;
@@ -54,13 +82,6 @@ $app->get('/page/{id}', function ($id) use ($app) {
     $response = $usecase->viewPage($request);
 
     return $app['twig']->render('view-page.html.twig', ['page' => $response->page]);
-});
-
-$app->get('/story/add', function () use ($app) {
-    $usecase = new \Etpa\UseCases\Story\ViewStoriesUseCase($app['em']->getRepository('Etpa\Domain\Story'));
-    $response = $usecase->viewStories(new \Etpa\UseCases\Story\ViewPageRequest());
-
-    return $app->escape(print_r($response->stories, 1));
 });
 
 $app->get('/reset', function () use ($app) {
