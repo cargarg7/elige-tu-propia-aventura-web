@@ -41,8 +41,6 @@ $app->get('/signup', function () use ($app) {
 })->bind('signup');
 
 $app->post('/signup', function () use ($app) {
-
-
     return $app['twig']->render('signup.html.twig');
 });
 
