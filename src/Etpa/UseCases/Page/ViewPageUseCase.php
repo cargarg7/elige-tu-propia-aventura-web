@@ -18,7 +18,7 @@ class ViewPageUseCase
      * @param ViewPageRequest $request
      * @return ViewPageResponse
      */
-    public function viewPage($request)
+    public function execute($request)
     {
         return $this->createResponse(
             $this->tryFindPageById($request)

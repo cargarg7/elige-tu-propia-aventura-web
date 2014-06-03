@@ -1,0 +1,26 @@
+Etpa\Domain\Action:
+  type: entity
+  table: action
+  repositoryClass: Etpa\Infrastructure\Persistence\Doctrine\ActionRepository
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 250
+  manyToOne:
+    fromPage:
+      targetEntity: Etpa\Domain\Page
+      inversedBy: actions
+      joinColumn:
+        name: from_id
+        referencedColumnName: id
+  oneToOne:
+    toPage:
+      targetEntity: Etpa\Domain\Page
+      joinColumn:
+        name: to_id
+        referencedColumnName: id

@@ -2,6 +2,8 @@
 
 namespace Etpa\Domain;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class Page
 {
     /**
@@ -20,19 +22,19 @@ class Page
     private $description;
 
     /**
-     * @var Page[]
+     * @var Action[]
      */
-    private $pages = [];
-
-    /**
-     * @var Page
-     */
-    private $source;
+    private $actions;
 
     /**
      * @var Story
      */
     private $story;
+
+    public function __construct()
+    {
+        $this->actions = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -63,7 +65,7 @@ class Page
 
     /**
      * @param string $title
-     *                      @return $this
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -82,7 +84,7 @@ class Page
 
     /**
      * @param string $description
-     *                            @return $this
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -92,32 +94,12 @@ class Page
     }
 
     /**
-     * @param \Etpa\Domain\Page $source
-     * @return $this
-     */
-    public function setSource($source)
-    {
-        $this->source = $source;
-
-        return $this;
-    }
-
-    /**
-     * @return \Etpa\Domain\Page
-     */
-    public function getSource()
-    {
-        return $this->source;
-    }
-
-    /**
-     * @param Page $page
+     * @param Action $page
      * @return $this
      */
     public function addPage($page)
     {
-        $this->pages[$page->getId()] = $page;
-        $page->setSource($this);
+        $this->actions[$page->getId()] = $page;
 
         return $this;
     }
@@ -125,18 +107,18 @@ class Page
     /**
      * @return Page[]
      */
-    public function getPages()
+    public function getActions()
     {
-        return $this->pages;
+        return $this->actions;
     }
 
     public function goToPage($id)
     {
-        if (!isset($this->pages[$id])) {
+        if (!isset($this->actions[$id])) {
             throw new NonExistingPageException();
         }
 
-        return $this->pages[$id];
+        return $this->actions[$id];
     }
 
     /**

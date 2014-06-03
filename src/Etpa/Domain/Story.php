@@ -29,20 +29,54 @@ class Story
      */
     private $firstPage;
 
+    public function __construct($title, $description)
+    {
+        // $this->setId($id);
+        $this->setTitle($title);
+        $this->setDescription($description);
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    private function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param string $title
+     * @return $this
+     */
+    private function setTitle($title)
+    {
+        $this->assertStringLengthIsLessOrEqual($title, self::TITLE_MAX_LENGTH);
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @param string $description
+     * @return $this
+     */
+    private function setDescription($description)
+    {
+        $this->assertStringLengthIsLessOrEqual($description, self::DESCRIPTION_MAX_LENGTH);
+        $this->description = $description;
+
+        return $this;
+    }
+
     /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -54,18 +88,6 @@ class Story
     }
 
     /**
-     * @param string $title
-     *                      @return $this
-     */
-    public function setTitle($title)
-    {
-        $this->assertStringLengthIsLessOrEqual($title, self::TITLE_MAX_LENGTH);
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getDescription()
@@ -74,19 +96,8 @@ class Story
     }
 
     /**
-     * @param string $description
-     *                            @return $this
-     */
-    public function setDescription($description)
-    {
-        $this->assertStringLengthIsLessOrEqual($description, self::DESCRIPTION_MAX_LENGTH);
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
      * @param \Etpa\Domain\Page $firstPage
+     * @todo DDD missing
      * @return $this
      */
     public function setFirstPage($firstPage)
@@ -99,7 +110,7 @@ class Story
     /**
      * @return \Etpa\Domain\Page
      */
-    public function getFirstPage()
+    public function open()
     {
         return $this->firstPage;
     }

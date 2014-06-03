@@ -4,8 +4,8 @@
     <h1 class="cover-heading">{{ page.title }}</h1>
     <p class="lead">{{ page.description }}</p>
     <p class="lead">
-        {% for page in page.pages %}
-            <a href="/page/{{ page.id }}" class="btn btn-lg btn-default">{{ page.title }}</a>
+        {% for action in page.actions %}
+            <a href="/page/{{ action.nextPage.id }}" class="btn btn-lg btn-default">{{ action.name }}</a>
         {% endfor %}
     </p>
 {% endblock %}

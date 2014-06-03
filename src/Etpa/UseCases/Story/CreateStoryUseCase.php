@@ -19,7 +19,7 @@ class CreateStoryUseCase
      * @return \Etpa\UseCases\Story\CreateStoryResponse
      * @throws CreateStoryException
      */
-    public function createStory($request)
+    public function execute($request)
     {
         $story = $this->tryToCreateStoryFromRequest($request);
         $this->tryToSaveStory($story);

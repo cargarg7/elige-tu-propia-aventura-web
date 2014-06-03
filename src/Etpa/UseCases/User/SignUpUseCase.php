@@ -2,6 +2,9 @@
 
 namespace Etpa\UseCases\Story;
 
+use Etpa\Domain\User;
+use Etpa\UseCases\User\SignUpResponse;
+
 class SignUpUseCase
 {
     /**
@@ -26,13 +29,17 @@ class SignUpUseCase
             throw new UserAlreadyExistException();
         }
 
-        $user = new User();
-        $user->setEmail($request->email);
-        $user->setName();
+        $this->userRepository->persist(
+            new User(
+                $request->email,
+                $request->name,
+                $request->lastName
+            )
+        );
 
-        $response = new ViewStoryResponse();
+        $response = new SignUpResponse();
+        $response->user = $user;
 
-        $response->user = $this->storyRepository->find($request->storyId);
         return $response;
     }
 }

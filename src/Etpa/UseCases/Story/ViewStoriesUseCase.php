@@ -15,11 +15,10 @@ class ViewStoriesUseCase
     }
 
     /**
-     * @param $request
      * @throws StoryRepositoryNotAvailableException
      * @return \Etpa\UseCases\Story\ViewStoriesResponse
      */
-    public function viewStories($request)
+    public function execute()
     {
         $response = new ViewStoriesResponse();
         try {

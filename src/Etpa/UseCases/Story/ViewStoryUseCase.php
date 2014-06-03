@@ -18,7 +18,7 @@ class ViewStoryUseCase
      * @param $request
      * @return \Etpa\UseCases\Story\ViewStoryResponse
      */
-    public function viewStory($request)
+    public function execute($request)
     {
         $response = new ViewStoryResponse();
         $response->story = $this->storyRepository->find($request->storyId);

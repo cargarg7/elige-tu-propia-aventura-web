@@ -2,9 +2,11 @@
     "name": "carlosbuenosvinos/elige-tu-propia-aventura-web",
     "require": {
         "silex/silex": "~1.1",
-        "doctrine/orm": "2.4.*",
+        "doctrine/orm": "~2.4",
+        "doctrine/data-fixtures": "v1.0.0",
         "twig/twig": ">=1.8,<2.0-dev",
-        "symfony/twig-bridge": "~2.3"
+        "symfony/twig-bridge": "~2.3",
+        "everyman/neo4jphp": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",

@@ -1,6 +1,6 @@
 <?php
 
-namespace Etpa\Test\Infraestructure\Persistence;
+namespace Etpa\Infrastructure\Persistence;
 
 use Etpa\UseCases\Story\StoryRepositoryNotAvailableException;
 

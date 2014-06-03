@@ -1,2 +1,2 @@
-elige-tu-propia-aventura-web
-============================
+    php composer.phar install
+    bower install

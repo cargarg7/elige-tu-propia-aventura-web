@@ -1,6 +1,6 @@
 <?php
 
-namespace Etpa\Infraestructure\Persistence\Doctrine;
+namespace Etpa\Infrastructure\Persistence\Doctrine;
 
 use Doctrine\ORM\EntityRepository;
 

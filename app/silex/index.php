@@ -1,6 +1,6 @@
 <?php
 
-use Etpa\Infraestructure\Persistence\Doctrine\EntityManagerFactory;
+use Etpa\Infrastructure\Persistence\Doctrine\EntityManagerFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 $filename = __DIR__.preg_replace('#(\?.*)$#', '', $_SERVER['REQUEST_URI']);
@@ -30,7 +30,7 @@ $app->get('/stories', function () use ($app) {
 
     $storyRepository = $app['em']->getRepository('Etpa\Domain\Story');
     $usecase = new \Etpa\UseCases\Story\ViewStoriesUseCase($storyRepository);
-    $response = $usecase->viewStories($request);
+    $response = $usecase->execute($request);
 
     return $app['twig']->render('view-stories.html.twig', ['stories' => $response->stories]);
 })->bind('read');
@@ -55,7 +55,7 @@ $app->post('/story/add', function (Request $httpRequest) use ($app) {
 
     $storyRepository = $app['em']->getRepository('Etpa\Domain\Story');
     $usecase = new \Etpa\UseCases\Story\CreateStoryUseCase($storyRepository);
-    $response = $usecase->createStory($request);
+    $response = $usecase->execute($request);
 
     return $app->redirect('/stories');
 });
@@ -66,7 +66,7 @@ $app->get('/story/{id}', function ($id) use ($app) {
 
     $storyRepository = $app['em']->getRepository('Etpa\Domain\Story');
     $usecase = new \Etpa\UseCases\Story\ViewStoryUseCase($storyRepository);
-    $response = $usecase->viewStory($request);
+    $response = $usecase->execute($request);
 
     return $app['twig']->render('view-story.html.twig', ['story' => $response->story]);
 });
@@ -77,7 +77,7 @@ $app->get('/page/{id}', function ($id) use ($app) {
 
     $pageRepository = $app['em']->getRepository('Etpa\Domain\Page');
     $usecase = new \Etpa\UseCases\Page\ViewPageUseCase($pageRepository);
-    $response = $usecase->viewPage($request);
+    $response = $usecase->execute($request);
 
     return $app['twig']->render('view-page.html.twig', ['page' => $response->page]);
 });

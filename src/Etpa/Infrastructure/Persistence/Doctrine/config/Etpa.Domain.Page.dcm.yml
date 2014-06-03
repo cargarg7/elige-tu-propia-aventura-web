@@ -1,0 +1,19 @@
+Etpa\Domain\Page:
+  type: entity
+  table: page
+  repositoryClass: Etpa\Infrastructure\Persistence\Doctrine\PageRepository
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    title:
+      type: string
+      length: 250
+    description:
+      type: text
+  oneToMany:
+    actions:
+      targetEntity: Etpa\Domain\Action
+      mappedBy: fromPage

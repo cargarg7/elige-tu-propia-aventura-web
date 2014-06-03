@@ -9,6 +9,7 @@
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="/components/flat-ui-official/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/components/flat-ui-official/css/flat-ui.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,40 +19,46 @@
     <![endif]-->
 </head>
 <body>
-    <div class="site-wrapper">
-        <div class="site-wrapper-inner">
-            <div class="cover-container">
-                <div class="masthead clearfix">
-                    <div class="inner">
-                        <h3 class="masthead-brand">Lyoa</h3>
-                        <ul class="nav masthead-nav">
-                            <li class="active"><a href="{{ path('home') }}">Home</a></li>
-                            <li><a href="{{ path('read') }}">Read</a></li>
-                            <li><a href="{{ path('add-story') }}">Write</a></li>
-                            <li><a href="{{ path('signup') }}">Sign up</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="inner cover">
-                    {% block content %}
-                        <h1 class="cover-heading">Live your own adventure</h1>
-                        <p class="lead">
-                            Read, write and share your <br/>"choose your own adventure" alike stories.
-                        </p>
-                        <p class="lead">
-                            <a href="{{ path('read') }}" class="btn btn-lg btn-default">Read</a>
-                            <a href="{{ path('add-story') }}" class="btn btn-lg btn-default">Write</a>
-                        </p>
-                    {% endblock %}
-                </div>
-                <div class="mastfoot">
-                    <div class="inner">
-                        <p>Live your own adventure - Copyright &copy; 2014</p>
-                    </div>
-                </div>
+    <div class="container">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="{{ path('home') }}">Adventure</a>
             </div>
-        </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{ path('read') }}">Read</a></li>
+                    <li><a href="{{ path('add-story') }}">Write</a></li>
+                    <li><a href="{{ path('signup') }}">Sign up</a></li>
+                </ul>
+                <button class="btn btn-default navbar-btn" type="button">Sign in</button>
+                <form class="navbar-form navbar-right" action="#" role="search">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn"><span class="fui-search"></span></button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </nav><!-- /navbar -->
     </div>
+
+            {% block content %}
+                <h1 class="cover-heading">Live your own adventure</h1>
+                <p class="lead">
+                    Read, write and share your <br/>"choose your own adventure" alike stories.
+                </p>
+                <p class="lead">
+                    <a href="{{ path('read') }}" class="btn btn-lg btn-default">Read</a>
+                    <a href="{{ path('add-story') }}" class="btn btn-lg btn-default">Write</a>
+                </p>
+            {% endblock %}
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

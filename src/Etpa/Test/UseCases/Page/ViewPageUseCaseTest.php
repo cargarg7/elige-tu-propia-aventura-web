@@ -3,8 +3,8 @@
 namespace Etpa\Tests\UseCases\Page;
 
 use Etpa\Domain\Page;
-use Etpa\Tests\Infraestructure\Persistence\NotAvailablePageRepository;
-use Etpa\Tests\Infraestructure\Persistence\EmptyPageRepository;
+use Etpa\Infrastructure\Persistence\NotAvailablePageRepository;
+use Etpa\Infrastructure\Persistence\EmptyPageRepository;
 use Etpa\UseCases\Page\ViewPageRequest;
 use Etpa\UseCases\Page\ViewPageUseCase;
 
