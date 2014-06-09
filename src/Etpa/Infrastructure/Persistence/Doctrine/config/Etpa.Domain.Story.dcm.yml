@@ -19,7 +19,3 @@ Etpa\Domain\Story:
     pages:
       targetEntity: Etpa\Domain\Action
       mappedBy: story
-  manyToOne:
-    author:
-      targetEntity: Etpa\Domain\User
-      mappedBy: stories
