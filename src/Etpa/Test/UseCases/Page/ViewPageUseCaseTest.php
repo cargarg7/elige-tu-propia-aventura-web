@@ -55,6 +55,6 @@ class ViewPageUseCaseTest extends \PHPUnit_Framework_TestCase
         $request = new ViewPageRequest();
         $request->pageId = 1;
 
-        return $usecase->viewPage($request);
+        return $usecase->execute($request);
     }
 }

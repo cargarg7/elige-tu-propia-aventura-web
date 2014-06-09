@@ -36,6 +36,6 @@ class ViewStoriesUseCaseTest extends \PHPUnit_Framework_TestCase
         $usecase = new ViewStoriesUseCase($storyRepository);
         $request = new ViewStoriesRequest();
 
-        return $usecase->viewStories($request);
+        return $usecase->execute($request);
     }
 }

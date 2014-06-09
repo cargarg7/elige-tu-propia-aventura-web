@@ -39,11 +39,23 @@ class Story
      */
     private $status;
 
+    /**
+     * @var float
+     */
+    private $rating;
+
+    /**
+     * @var int
+     */
+    private $votes;
+
     public function __construct($title, $description)
     {
         $this->setTitle($title);
         $this->setDescription($description);
         $this->setStatus(StoryStatus::DRAFT);
+        $this->setVotes(0);
+        $this->setRating(null);
     }
 
     /**
@@ -82,11 +94,30 @@ class Story
     }
 
     /**
+     * @param $status
+     * @return $this
+     */
+    private function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
@@ -107,10 +138,9 @@ class Story
 
     /**
      * @param \Etpa\Domain\Page $firstPage
-     * @todo DDD missing
      * @return $this
      */
-    public function setFirstPage($firstPage)
+    public function chooseFirstPage($firstPage)
     {
         $this->firstPage = $firstPage;
 
@@ -120,13 +150,36 @@ class Story
     /**
      * @return \Etpa\Domain\Page
      */
-    public function open()
+    public function start()
     {
         return $this->firstPage;
     }
 
-    private function setStatus($status)
+    /**
+     * @param int $rating
+     * @return $this
+     */
+    public function rate($rating)
     {
-        $this->status = $status;
+        $this->rating = (($this->rating * $this->votes) + $rating) / $this->incrementVotes();
+
+        return $this;
+    }
+
+    private function incrementVotes()
+    {
+        return ++$this->votes;
+    }
+
+    private function setVotes($votes)
+    {
+        $this->votes = $votes;
+    }
+
+    private function setRating($rating)
+    {
+        $this->rating = $rating;
+
+        return $this;
     }
 }
