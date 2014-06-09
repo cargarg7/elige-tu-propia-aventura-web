@@ -17,3 +17,10 @@ Etpa\Domain\Page:
     actions:
       targetEntity: Etpa\Domain\Action
       mappedBy: fromPage
+  manyToOne:
+    story:
+      targetEntity: Etpa\Domain\Story
+      inversedBy: story
+      joinColumn:
+        name: story_id
+        referencedColumnName: id

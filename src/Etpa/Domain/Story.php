@@ -29,11 +29,21 @@ class Story
      */
     private $firstPage;
 
+    /**
+     * @var Page[]
+     */
+    private $pages;
+
+    /**
+     * @var int
+     */
+    private $status;
+
     public function __construct($title, $description)
     {
-        // $this->setId($id);
         $this->setTitle($title);
         $this->setDescription($description);
+        $this->setStatus(StoryStatus::DRAFT);
     }
 
     /**
@@ -113,5 +123,10 @@ class Story
     public function open()
     {
         return $this->firstPage;
+    }
+
+    private function setStatus($status)
+    {
+        $this->status = $status;
     }
 }

@@ -1,10 +1,11 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1 class="cover-heading">Stories</h1>
-    <p class="lead">Choose your next adventure</p>
+    <h1 class="cover-heading">Dashboard</h1>
+    <p class="lead">My stories</p>
+    <a href="{{ path('add-story') }}" class="btn btn-lg btn-default">Add story</a>
     <div class="row">
-        {% for story in stories %}
+        {% for story in user.stories %}
             <div class="col-xs-3">
                 <div class="tile">
                     <img src="/components/startup/common-files/icons/Compas@2x.png" alt="Compas" class="tile-image big-illustration">
@@ -15,5 +16,4 @@
             </div>
         {% endfor %}
     </div>
-    <a href="{{ path('add-story') }}" class="btn btn-lg btn-default">Add story</a>
 {% endblock %}

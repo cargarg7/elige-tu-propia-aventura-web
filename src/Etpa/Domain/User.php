@@ -20,11 +20,6 @@ class User
     private $name;
 
     /**
-     * @var string
-     */
-    private $password;
-
-    /**
      * @return int
      */
     public function getId()
@@ -77,25 +72,6 @@ class User
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param string $password
-     * @return $this
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
 
         return $this;
     }

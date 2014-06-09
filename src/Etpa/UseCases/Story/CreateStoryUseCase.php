@@ -47,14 +47,10 @@ class CreateStoryUseCase
      */
     private function createStoryFromRequest($request)
     {
-        $story = new \Etpa\Domain\Story();
-        $story->setTitle($request->title);
-        $story->setDescription($request->description);
-
-        $page = new \Etpa\Domain\Page();
-        $page->setTitle('Fin');
-
-        $story->setFirstPage($page);
+        $story = new \Etpa\Domain\Story(
+            $request->title,
+            $request->description
+        );
 
         return $story;
     }
@@ -68,7 +64,7 @@ class CreateStoryUseCase
         try {
             $this->saveStory($story);
         } catch (\Exception $e) {
-            throw new CreateStoryException();
+            throw new CreateStoryException($e);
         }
     }
 

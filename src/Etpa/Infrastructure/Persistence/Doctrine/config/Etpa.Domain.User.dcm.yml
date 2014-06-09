@@ -1,0 +1,20 @@
+Etpa\Domain\User:
+  type: entity
+  table: user
+  repositoryClass: Etpa\Infrastructure\Persistence\Doctrine\UserRepository
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 250
+    email:
+      type: string
+      length: 250
+  oneToMany:
+    stories:
+      targetEntity: Etpa\Domain\Story
+      mappedBy: author
