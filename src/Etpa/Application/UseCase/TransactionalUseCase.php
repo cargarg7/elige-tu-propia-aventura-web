@@ -1,17 +1,13 @@
 <?php
 
-namespace UseCase;
+namespace Etpa\Application\UseCase;
 
-use HexArch\Request;
-use HexArch\GenericUseCaseResponse;
-use Doctrine\ORM\Session;
-use HexArch\UseCase;
 use LogicException;
 
 class TransactionalUseCase
 {
     /**
-     * @var Session
+     * @var TransactionalSession
      */
     private $session;
 
@@ -22,7 +18,7 @@ class TransactionalUseCase
 
     /**
      * @param UseCase $useCase
-     * @param Session $session
+     * @param TransactionalSession $session
      */
     public function __construct($useCase, $session)
     {
@@ -34,10 +30,7 @@ class TransactionalUseCase
      * Executes this use case transactionally
      *
      * @param Request $request
-     *
      * @throws LogicException
-     *
-     * @return GenericUseCaseResponse
      */
     public function execute($request)
     {

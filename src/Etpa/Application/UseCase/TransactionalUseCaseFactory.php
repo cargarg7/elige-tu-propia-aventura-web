@@ -1,19 +1,16 @@
 <?php
 
-namespace UseCase;
-
-use Doctrine\ORM\Session;
-use HexArch\UseCase;
+namespace Etpa\Application\UseCase;
 
 class TransactionalUseCaseFactory
 {
     /**
-     * @var Session
+     * @var TransactionalSession
      */
     private $session;
 
     /**
-     * @param Session $session
+     * @param TransactionalSession $session
      */
     public function __construct($session)
     {

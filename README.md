@@ -15,7 +15,7 @@ not reissue titles by Packard, who has started his own imprint, U-Ventures.
 
 ## Requirements
     PHP
-    MySQL
+    SQLite
     node
 
 ## Set up PHP dependencies

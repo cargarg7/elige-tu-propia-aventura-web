@@ -15,6 +15,11 @@ Etpa\Domain\Story:
       type: text
     status:
       type: integer
+    rating:
+      type: integer
+      nullable: true
+    votes:
+      type: integer
   oneToMany:
     pages:
       targetEntity: Etpa\Domain\Action

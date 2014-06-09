@@ -2,7 +2,7 @@
 
 namespace Etpa\Domain;
 
-use Etpa\Infrastructure\Persistence\UuidGenerator;
+use Etpa\Infrastructure\Identity\UuidGenerator;
 
 class StoryId
 {
@@ -11,8 +11,13 @@ class StoryId
      */
     private $id;
 
-    public function __construct($id)
+    public function __construct($id = null)
     {
         $this->id = $id ?: UuidGenerator::generate();
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

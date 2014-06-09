@@ -1,6 +1,6 @@
 <?php
 
-namespace Etpa\Infrastructure\Persistence;
+namespace Etpa\Infrastructure\Persistence\Dummy;
 
 use Etpa\Domain\StoryRepository;
 

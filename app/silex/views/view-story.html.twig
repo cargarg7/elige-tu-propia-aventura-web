@@ -5,5 +5,17 @@
     <p class="lead">{{ story.description }}</p>
     <p class="lead">
         <a href="/page/{{ story.id }}" class="btn btn-lg btn-default">Start</a>
+        <button class="btn btn-info">Rating: {{ story.rating }}</button>
     </p>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Rate it<span class="caret"></span></button>
+        <span class="dropdown-arrow"></span>
+        <ul class="dropdown-menu">
+            <li><a href="{{ path('rate-story', {storyId: story.id, rating:1}) }}">Poor</a></li>
+            <li><a href="{{ path('rate-story', {storyId: story.id, rating:2}) }}">Not bad</a></li>
+            <li><a href="{{ path('rate-story', {storyId: story.id, rating:3}) }}">Cool</a></li>
+            <li><a href="{{ path('rate-story', {storyId: story.id, rating:4}) }}">Great!</a></li>
+            <li><a href="{{ path('rate-story', {storyId: story.id, rating:5}) }}">Excellent!</a></li>
+        </ul>
+    </div>
 {% endblock %}

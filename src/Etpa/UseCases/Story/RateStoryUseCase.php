@@ -15,66 +15,16 @@ class RateStoryUseCase
     }
 
     /**
-     * @param  CreateStoryRequest                       $request
-     * @return \Etpa\UseCases\Story\CreateStoryResponse
-     * @throws CreateStoryException
+     * @param  CreateStoryRequest   $request
+     * @return CreateStoryResponse
      */
     public function execute($request)
     {
-        $story = $this->findStory($request->storyId);
-        $story->rate($request->rate);
-        $this->tryToSaveStory($story);
+        $story = $this->storyRepository->find($request->storyId);
+        $story->rate($request->rating);
+        $this->storyRepository->persist($story);
 
         return $this->createResponse($story);
-    }
-
-    /**
-     * @param $request
-     * @return \Etpa\Domain\Story
-     * @throws CreateStoryException
-     */
-    private function tryToCreateStoryFromRequest($request)
-    {
-        try {
-            return $this->createStoryFromRequest($request);
-        } catch (\Exception $e) {
-            throw new CreateStoryException('There is some validation problem.');
-        }
-    }
-
-    /**
-     * @param $request
-     * @return \Etpa\Domain\Story
-     */
-    private function createStoryFromRequest($request)
-    {
-        $story = new \Etpa\Domain\Story(
-            $request->title,
-            $request->description
-        );
-
-        return $story;
-    }
-
-    /**
-     * @param $story
-     * @throws CreateStoryException
-     */
-    private function tryToSaveStory($story)
-    {
-        try {
-            $this->saveStory($story);
-        } catch (\Exception $e) {
-            throw new CreateStoryException($e);
-        }
-    }
-
-    /**
-     * @param $story
-     */
-    private function saveStory($story)
-    {
-        $this->storyRepository->persist($story);
     }
 
     /**
@@ -83,7 +33,7 @@ class RateStoryUseCase
      */
     private function createResponse($story)
     {
-        $response = new CreateStoryResponse();
+        $response = new RateStoryResponse();
         $response->story = $story;
 
         return $response;

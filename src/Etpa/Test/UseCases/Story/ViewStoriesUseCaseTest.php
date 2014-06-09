@@ -2,8 +2,8 @@
 
 namespace Etpa\Tests\UseCases\Story;
 
-use Etpa\Infrastructure\Persistence\NotAvailableStoryRepository;
-use Etpa\Infrastructure\Persistence\EmptyStoryRepository;
+use Etpa\Infrastructure\Persistence\Dummy\NotAvailableStoryRepository;
+use Etpa\Infrastructure\Persistence\Dummy\EmptyStoryRepository;
 use Etpa\UseCases\Story\ViewStoriesRequest;
 use Etpa\UseCases\Story\ViewStoriesUseCase;
 

@@ -61,6 +61,6 @@ class StoryTest extends \PHPUnit_Framework_TestCase
      */
     private function createEmptyStory()
     {
-        return new Story('title', 'description');
+        return new Story(null, 'title', 'description');
     }
 }

@@ -15,6 +15,11 @@ class Story
     private $id;
 
     /**
+     * @var StoryId
+     */
+    private $storyId;
+
+    /**
      * @var string
      */
     private $title;
@@ -40,17 +45,25 @@ class Story
     private $status;
 
     /**
-     * @var float
+     * @var int
      */
-    private $rating;
+    private $rating = null;
 
     /**
      * @var int
      */
-    private $votes;
+    private $votes = 0;
 
-    public function __construct($title, $description)
+    /**
+     * @param StoryId $storyId
+     * @param string $title
+     * @param string $description
+     * @throws \Exception
+     */
+    public function __construct($storyId, $title, $description)
     {
+        // $this->setId(new StoryId($storyId));
+        $this->setId($storyId);
         $this->setTitle($title);
         $this->setDescription($description);
         $this->setStatus(StoryStatus::DRAFT);
@@ -59,11 +72,18 @@ class Story
     }
 
     /**
-     * @param int $id
+     * @param StoryId $id
+     * @throws \Exception
      * @return $this
      */
     private function setId($id)
     {
+        if (null !== $this->id) {
+            throw new \Exception('Id must not be changed');
+        }
+
+        // $this->storyId = new StoryId($id);
+        // $this->id = $this->storyId->getId();
         $this->id = $id;
 
         return $this;
@@ -105,7 +125,7 @@ class Story
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -141,7 +161,11 @@ class Story
      */
     public function getRating()
     {
-        return $this->rating;
+        if (null === $this->rating) {
+            return null;
+        }
+
+        return (float) $this->rating / 100;
     }
 
     /**
@@ -169,7 +193,15 @@ class Story
      */
     public function rate($rating)
     {
-        $this->rating = (float) (($this->rating * $this->votes) + $rating) / $this->incrementVotes();
+        $this->rating = (($this->rating * $this->votes) + ($rating * 100)) / $this->incrementVotes();
+
+        /*
+        DomainPublisher::getInstance()->publish(
+            new StoryRated(
+
+            )
+        );
+        */
 
         return $this;
     }
