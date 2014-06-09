@@ -137,6 +137,14 @@ class Story
     }
 
     /**
+     * @return float
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
      * @param \Etpa\Domain\Page $firstPage
      * @return $this
      */
@@ -161,7 +169,7 @@ class Story
      */
     public function rate($rating)
     {
-        $this->rating = (($this->rating * $this->votes) + $rating) / $this->incrementVotes();
+        $this->rating = (float) (($this->rating * $this->votes) + $rating) / $this->incrementVotes();
 
         return $this;
     }
