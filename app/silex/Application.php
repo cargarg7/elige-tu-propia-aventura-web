@@ -100,6 +100,12 @@ class Application
             if ($token && !$app['security.trust_resolver']->isAnonymous($token)) {
                 $app['user'] = $token->getUser();
             }
+
+            \Etpa\Application\DomainEventPublisher::getInstance()->subscribe(
+                new \Etpa\Application\PersistDomainEventSubscriber(
+                    $app['em']->getRepository('Etpa\Domain\Event')
+                )
+            );
         });
 
         return $app;

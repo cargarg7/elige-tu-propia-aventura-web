@@ -2,6 +2,8 @@
 
 namespace Etpa\Domain;
 
+use Etpa\Application\DomainEventPublisher;
+
 class Story
 {
     use Validator;
@@ -195,13 +197,9 @@ class Story
     {
         $this->rating = (($this->rating * $this->votes) + ($rating * 100)) / $this->incrementVotes();
 
-        /*
-        DomainPublisher::getInstance()->publish(
-            new StoryRated(
-
-            )
+        DomainEventPublisher::getInstance()->publish(
+            new StoryRated($this->id)
         );
-        */
 
         return $this;
     }

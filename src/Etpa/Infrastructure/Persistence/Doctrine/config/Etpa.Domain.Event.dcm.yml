@@ -1,0 +1,20 @@
+Etpa\Domain\Event:
+  type: entity
+  table: event
+  repositoryClass: Etpa\Infrastructure\Persistence\Doctrine\EventRepository
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    eventBody:
+      type: text
+    eventType:
+      type: string
+      length: 255
+    streamName:
+      type: string
+      length: 255
+    streamVersion:
+      type: integer

@@ -13,6 +13,6 @@ class StoryRepository extends EntityRepository implements \Etpa\Domain\StoryRepo
     public function persist($story)
     {
         $this->_em->persist($story);
-        $this->_em->flush();
+        $this->_em->flush($story);
     }
 }

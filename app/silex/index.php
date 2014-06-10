@@ -51,7 +51,6 @@ $app->get('/story/{storyId}/rating/{rating}', function ($storyId, $rating) use (
     $request->rating = $rating;
 
     $response = $usecase->execute($request);
-
     return $app->redirect($app['url_generator']->generate('story', array('id' => $response->story->getId())));
 })->bind('rate-story');
 
