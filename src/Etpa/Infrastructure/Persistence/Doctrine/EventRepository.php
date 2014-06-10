@@ -12,5 +12,6 @@ class EventRepository extends EntityRepository// implements \Etpa\Domain\EventRe
     public function persist($event)
     {
         $this->_em->persist($event);
+        $this->_em->flush($event);
     }
 }

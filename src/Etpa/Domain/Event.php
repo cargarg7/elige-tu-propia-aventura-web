@@ -8,5 +8,12 @@ class Event
     private $eventType;
     private $eventBody;
     private $streamName;
-    private $streamVersion;
+    private $streamVersion = 1;
+
+    public function __construct($eventType, $eventBody, $streamName)
+    {
+        $this->eventType = $eventType;
+        $this->eventBody = $eventBody;
+        $this->streamName = $streamName;
+    }
 }

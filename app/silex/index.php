@@ -20,9 +20,7 @@ $app->get('/', function () use ($app) {
 // View stories
 $app->get('/stories', function () use ($app) {
     $request = new \Etpa\UseCases\Story\ViewStoriesRequest();
-
-    $storyRepository = $app['em']->getRepository('Etpa\Domain\Story');
-    $usecase = new \Etpa\UseCases\Story\ViewStoriesUseCase($storyRepository);
+    $usecase = new \Etpa\UseCases\Story\ViewStoriesUseCase($app['story-repository']);
     $response = $usecase->execute($request);
 
     return $app['twig']->render('view-stories.html.twig', ['stories' => $response->stories]);
@@ -33,17 +31,14 @@ $app->get('/story/{id}', function ($id) use ($app) {
     $request = new \Etpa\UseCases\Story\ViewStoryRequest();
     $request->storyId = $id;
 
-    $storyRepository = $app['em']->getRepository('Etpa\Domain\Story');
-    $usecase = new \Etpa\UseCases\Story\ViewStoryUseCase($storyRepository);
-    $response = $usecase->execute($request);
+    $response = (new \Etpa\UseCases\Story\ViewStoryUseCase($app['story-repository']))->execute($request);
 
     return $app['twig']->render('view-story.html.twig', ['story' => $response->story]);
 })->bind('story');
 
 // Rate story
 $app->get('/story/{storyId}/rating/{rating}', function ($storyId, $rating) use ($app) {
-    $storyRepository = $app['em']->getRepository('Etpa\Domain\Story');
-    $usecase = new \Etpa\UseCases\Story\RateStoryUseCase($storyRepository);
+    $usecase = new \Etpa\UseCases\Story\RateStoryUseCase($app['story-repository']);
     $usecase = $app['tx-use-case-factory']->newTransactionalUseCaseFrom($usecase);
 
     $request = new \Etpa\UseCases\Story\RateStoryRequest();
@@ -53,6 +48,18 @@ $app->get('/story/{storyId}/rating/{rating}', function ($storyId, $rating) use (
     $response = $usecase->execute($request);
     return $app->redirect($app['url_generator']->generate('story', array('id' => $response->story->getId())));
 })->bind('rate-story');
+
+// View page
+$app->get('/page/{id}', function ($id) use ($app) {
+    $request = new \Etpa\UseCases\Page\ViewPageRequest();
+    $request->pageId = $id;
+
+    $pageRepository = $app['em']->getRepository('Etpa\Domain\Page');
+    $usecase = new \Etpa\UseCases\Page\ViewPageUseCase($pageRepository);
+    $response = $usecase->execute($request);
+
+    return $app['twig']->render('view-page.html.twig', ['page' => $response->page]);
+})->bind('page');
 
 $app->get('/signup', function () use ($app) {
     return $app['twig']->render('signup.html.twig');
@@ -92,16 +99,5 @@ $app->get('/dashboard', function () use ($app) {
 
     return $app['twig']->render('dashboard.html.twig', ['user' => $response->user]);
 })->bind('dashboard');
-
-$app->get('/page/{id}', function ($id) use ($app) {
-    $request = new \Etpa\UseCases\Page\ViewPageRequest();
-    $request->pageId = $id;
-
-    $pageRepository = $app['em']->getRepository('Etpa\Domain\Page');
-    $usecase = new \Etpa\UseCases\Page\ViewPageUseCase($pageRepository);
-    $response = $usecase->execute($request);
-
-    return $app['twig']->render('view-page.html.twig', ['page' => $response->page]);
-});
 
 $app->run();

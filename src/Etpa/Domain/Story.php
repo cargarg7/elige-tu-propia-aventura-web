@@ -17,11 +17,6 @@ class Story
     private $id;
 
     /**
-     * @var StoryId
-     */
-    private $storyId;
-
-    /**
      * @var string
      */
     private $title;
@@ -74,7 +69,7 @@ class Story
     }
 
     /**
-     * @param StoryId $id
+     * @param string $id
      * @throws \Exception
      * @return $this
      */
@@ -167,7 +162,7 @@ class Story
             return null;
         }
 
-        return (float) $this->rating / 100;
+        return (float) ($this->rating / 100);
     }
 
     /**
@@ -198,7 +193,10 @@ class Story
         $this->rating = (($this->rating * $this->votes) + ($rating * 100)) / $this->incrementVotes();
 
         DomainEventPublisher::getInstance()->publish(
-            new StoryRated($this->id)
+            new StoryRated(
+                $this->id,
+                $rating
+            )
         );
 
         return $this;
@@ -212,6 +210,8 @@ class Story
     private function setVotes($votes)
     {
         $this->votes = $votes;
+
+        return $this;
     }
 
     private function setRating($rating)

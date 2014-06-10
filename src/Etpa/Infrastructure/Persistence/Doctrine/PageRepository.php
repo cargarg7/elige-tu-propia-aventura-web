@@ -13,6 +13,6 @@ class PageRepository extends EntityRepository implements \Etpa\Domain\PageReposi
     public function persist($page)
     {
         $this->_em->persist($page);
-        $this->_em->flush();
+        $this->_em->flush($page);
     }
 }

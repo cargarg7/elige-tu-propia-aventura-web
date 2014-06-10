@@ -9,12 +9,24 @@ class StoryRated implements DomainEvent
     private $storyId;
     private $eventVersion;
     private $occurredOn;
+    private $rating;
 
-    public function __construct($storyId)
+    public function __construct($storyId, $rating)
     {
         $this->storyId = $storyId;
+        $this->rating = $rating;
         $this->eventVersion = 1;
         $this->occurredOn = new \DateTime();
+    }
+
+    public function getType()
+    {
+        return __CLASS__;
+    }
+
+    public function getStreamName()
+    {
+        return 'story-rated:'.$this->storyId;
     }
 
     /**

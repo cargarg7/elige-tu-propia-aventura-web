@@ -27,6 +27,9 @@ not reissue titles by Packard, who has started his own imprint, U-Ventures.
 
 ## Set up database schema
     php bin/doctrine orm:database-schema:create
+    php load-database.php
 
 ## Start the server
     php -S localhost:8080 -t app/silex
+
+Go to your internet browser and open `http://localhost:8080` 

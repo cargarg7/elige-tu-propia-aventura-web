@@ -7,16 +7,27 @@ class Application
     public static function bootstrap()
     {
         $app = new Silex\Application();
-        $app['debug'] = true;
-        $app['em'] = function() {
-            return (new EntityManagerFactory())->build();
-        };
 
-        $app['tx-use-case-factory'] = function($app) {
+        $app['debug'] = true;
+
+        $app['em'] = $app->share(function() {
+            return (new EntityManagerFactory())->build();
+        });
+
+        $app['story-repository'] = $app->share(function($app) {
+            return $app['em']->getRepository('Etpa\Domain\Story');
+            return new \Etpa\Infrastructure\Persistence\Redis\StoryRepository();
+        });
+
+        $app['event-repository'] = $app->share(function($app) {
+            return $app['em']->getRepository('Etpa\Domain\Event');
+        });
+
+        $app['tx-use-case-factory'] = $app->share(function($app) {
             return new \Etpa\Application\UseCase\TransactionalUseCaseFactory(
                 new \Etpa\Infrastructure\Persistence\Doctrine\Session($app['em'])
             );
-        };
+        });
 
         $app->register(new Silex\Provider\SessionServiceProvider());
         $app->register(
@@ -103,7 +114,7 @@ class Application
 
             \Etpa\Application\DomainEventPublisher::getInstance()->subscribe(
                 new \Etpa\Application\PersistDomainEventSubscriber(
-                    $app['em']->getRepository('Etpa\Domain\Event')
+                    $app['event-repository']
                 )
             );
         });

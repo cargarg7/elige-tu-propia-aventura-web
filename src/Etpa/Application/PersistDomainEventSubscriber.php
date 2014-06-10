@@ -2,6 +2,8 @@
 
 namespace Etpa\Application;
 
+use Etpa\Domain\Event;
+
 class PersistDomainEventSubscriber implements DomainEventSubscriber
 {
     private $eventRepository;
@@ -13,18 +15,15 @@ class PersistDomainEventSubscriber implements DomainEventSubscriber
 
     public function handleEvent(DomainEvent $event)
     {
-        print_r($event);
-        die();
+        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+        $serializedEvent = $serializer->serialize($event, 'json');
 
-        /*
         $databaseEvent = new Event(
-            null,
-            json_encode($event),
             $event->getType(),
-
+            $serializedEvent,
+            $event->getStreamName()
         );
-        */
 
-        // $this->eventRepository->persist($event);
+        $this->eventRepository->persist($databaseEvent);
     }
 }
