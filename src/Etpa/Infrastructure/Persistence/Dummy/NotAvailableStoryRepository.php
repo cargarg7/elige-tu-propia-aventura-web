@@ -21,4 +21,12 @@ class NotAvailableStoryRepository implements \Etpa\Domain\StoryRepository
     {
         throw new StoryRepositoryNotAvailableException();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function find($id)
+    {
+        throw new StoryRepositoryNotAvailableException();
+    }
 }

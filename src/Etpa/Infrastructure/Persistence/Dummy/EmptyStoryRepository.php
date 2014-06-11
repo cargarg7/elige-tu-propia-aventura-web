@@ -21,4 +21,13 @@ class EmptyStoryRepository implements StoryRepository
     {
         return [];
     }
+
+    /**
+     * @param int $id
+     * @return \Etpa\Domain\Story $story
+     */
+    public function find($id)
+    {
+        return null;
+    }
 }
