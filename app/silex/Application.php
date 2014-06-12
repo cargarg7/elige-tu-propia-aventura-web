@@ -16,7 +16,7 @@ class Application
 
         $app['story-repository'] = $app->share(function($app) {
             return $app['em']->getRepository('Etpa\Domain\Story');
-            return new \Etpa\Infrastructure\Persistence\Redis\StoryRepository();
+            return new \Etpa\Infrastructure\Persistence\Redis\RedisStoryRepository();
         });
 
         $app['event-repository'] = $app->share(function($app) {

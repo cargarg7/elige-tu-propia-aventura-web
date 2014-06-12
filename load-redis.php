@@ -7,7 +7,7 @@ require_once __DIR__.'/vendor/autoload.php';
 $client = new \Predis\Client();
 $client->flushAll();
 
-$repository = new \Etpa\Infrastructure\Persistence\Redis\StoryRepository();
+$repository = new \Etpa\Infrastructure\Persistence\Redis\RedisStoryRepository();
 $story = new Story(
     1,
     'Hexagonal Architecture',

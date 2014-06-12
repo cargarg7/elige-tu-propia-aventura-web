@@ -1,7 +1,7 @@
 Etpa\Domain\Story:
   type: entity
   table: story
-  repositoryClass: Etpa\Infrastructure\Persistence\Doctrine\StoryRepository
+  repositoryClass: Etpa\Infrastructure\Persistence\Doctrine\DoctrineStoryRepository
   id:
     id:
       type: integer

@@ -3,8 +3,9 @@
 namespace Etpa\Infrastructure\Persistence\Doctrine;
 
 use Doctrine\ORM\EntityRepository;
+use \Etpa\Domain\StoryRepository as StoryRepositoryInterface;
 
-class StoryRepository extends EntityRepository implements \Etpa\Domain\StoryRepository
+class DoctrineStoryRepository extends EntityRepository implements StoryRepositoryInterface
 {
     /**
      * @param  \Etpa\Domain\Story $story

@@ -4,7 +4,7 @@ namespace Etpa\Infrastructure\Persistence\Redis;
 
 use Predis\Client;
 
-class StoryRepository implements \Etpa\Domain\StoryRepository
+class RedisStoryRepository implements \Etpa\Domain\StoryRepository
 {
     private $connection;
 
