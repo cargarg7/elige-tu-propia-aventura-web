@@ -12,6 +12,6 @@ class UuidGenerator implements UuidGeneratorInterface
      */
     public static function generate()
     {
-        return Uuid::uuid4()->toString();
+        return Uuid::uuid1()->toString();
     }
 }

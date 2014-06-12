@@ -12,9 +12,9 @@ class Story
     const DESCRIPTION_MAX_LENGTH = 1500;
 
     /**
-     * @var int
+     * @var StoryId
      */
-    private $id;
+    private $storyId;
 
     /**
      * @var string
@@ -57,9 +57,8 @@ class Story
      * @param string $description
      * @throws \Exception
      */
-    public function __construct($storyId, $title, $description)
+    public function __construct(StoryId $storyId, $title, $description)
     {
-        // $this->setId(new StoryId($storyId));
         $this->setId($storyId);
         $this->setTitle($title);
         $this->setDescription($description);
@@ -69,19 +68,17 @@ class Story
     }
 
     /**
-     * @param string $id
-     * @throws \Exception
+     * @param $storyId
      * @return $this
+     * @throws \Exception
      */
-    private function setId($id)
+    private function setId($storyId)
     {
-        if (null !== $this->id) {
+        if (null !== $this->storyId) {
             throw new \Exception('Id must not be changed');
         }
 
-        // $this->storyId = new StoryId($id);
-        // $this->id = $this->storyId->getId();
-        $this->id = $id;
+        $this->storyId = $storyId;
 
         return $this;
     }
@@ -126,7 +123,7 @@ class Story
      */
     public function getId()
     {
-        return $this->id;
+        return $this->storyId->id();
     }
 
     /**

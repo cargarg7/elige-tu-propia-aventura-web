@@ -2,6 +2,9 @@
 
 namespace Etpa\UseCases\Story;
 
+use Etpa\Domain\Story;
+use Etpa\Domain\StoryId;
+
 class CreateStoryUseCase
 {
     /**
@@ -15,8 +18,8 @@ class CreateStoryUseCase
     }
 
     /**
-     * @param  CreateStoryRequest                       $request
-     * @return \Etpa\UseCases\Story\CreateStoryResponse
+     * @param  CreateStoryRequest   $request
+     * @return CreateStoryResponse
      * @throws CreateStoryException
      */
     public function execute($request)
@@ -29,7 +32,7 @@ class CreateStoryUseCase
 
     /**
      * @param $request
-     * @return \Etpa\Domain\Story
+     * @return Story
      * @throws CreateStoryException
      */
     private function tryToCreateStoryFromRequest($request)
@@ -43,11 +46,12 @@ class CreateStoryUseCase
 
     /**
      * @param $request
-     * @return \Etpa\Domain\Story
+     * @return Story
      */
     private function createStoryFromRequest($request)
     {
-        $story = new \Etpa\Domain\Story(
+        $story = new Story(
+            new StoryId(),
             $request->title,
             $request->description
         );
@@ -64,7 +68,7 @@ class CreateStoryUseCase
         try {
             $this->saveStory($story);
         } catch (\Exception $e) {
-            throw new CreateStoryException($e);
+            throw new CreateStoryException();
         }
     }
 
