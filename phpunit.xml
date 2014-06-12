@@ -18,6 +18,10 @@
         <ini name="date.timezone" value="Europe/Madrid"/>
     </php>
 
+    <listeners>
+        <listener class="\Mockery\Adapter\Phpunit\TestListener"></listener>
+    </listeners>
+
     <testsuites>
         <testsuite name="Etpa Test Suite">
             <directory>./src/Etpa/</directory>

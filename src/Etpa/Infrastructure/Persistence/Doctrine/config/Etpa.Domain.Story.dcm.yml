@@ -3,8 +3,8 @@ Etpa\Domain\Story:
   table: story
   repositoryClass: Etpa\Infrastructure\Persistence\Doctrine\DoctrineStoryRepository
   id:
-    storyId:
-      type: storyid
+    id:
+      type: string
       generator:
         strategy: NONE
   fields:

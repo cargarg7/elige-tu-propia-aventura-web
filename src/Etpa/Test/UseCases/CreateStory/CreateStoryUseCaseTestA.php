@@ -3,12 +3,13 @@
 namespace Etpa\Tests\UseCases\CreateStory;
 
 use Etpa\Tests\Infrastructure\Persistence\NotAvailableStoryRepository;
+use Etpa\UseCases\Story\CreateStoryUseCase;
 
 class CreateStoryUseCaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     * @expectedException \Etpa\UseCases\CreateStory\CreateStoryException
+     * @expectedException \Etpa\UseCases\Story\CreateStoryException
      */
     public function ifRepositoryIsNotAvailableAnExceptionShouldBeThrown()
     {
@@ -32,12 +33,11 @@ class CreateStoryUseCaseTest extends \PHPUnit_Framework_TestCase
     /**
      * @param $storyRepository
      * @param $request
-     * @return \Etpa\UseCases\CreateStory\CreateStoryResponse
+     * @return \Etpa\UseCases\Story\CreateStoryResponse
      */
     private function executeRequest($storyRepository, $request)
     {
-        return (new \Etpa\UseCases\CreateStory\CreateStoryUseCase($storyRepository))
-            ->createStory($request);
+        return (new CreateStoryUseCase($storyRepository))->execute($request);
     }
 
     /**

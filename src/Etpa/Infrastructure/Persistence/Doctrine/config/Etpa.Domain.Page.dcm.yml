@@ -23,4 +23,4 @@ Etpa\Domain\Page:
       inversedBy: story
       joinColumn:
         name: story_id
-        referencedColumnName: storyId
+        referencedColumnName: id

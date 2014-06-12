@@ -12,6 +12,11 @@ class Story
     const DESCRIPTION_MAX_LENGTH = 1500;
 
     /**
+     * @var string
+     */
+    private $id;
+
+    /**
      * @var StoryId
      */
     private $storyId;
@@ -72,12 +77,13 @@ class Story
      * @return $this
      * @throws \Exception
      */
-    private function setId($storyId)
+    private function setId(StoryId $storyId)
     {
         if (null !== $this->storyId) {
             throw new \Exception('Id must not be changed');
         }
 
+        $this->id = $storyId->id();
         $this->storyId = $storyId;
 
         return $this;
@@ -119,11 +125,11 @@ class Story
     }
 
     /**
-     * @return string
+     * @return StoryId
      */
     public function getId()
     {
-        return $this->storyId->id();
+        return new StoryId($this->id);
     }
 
     /**
