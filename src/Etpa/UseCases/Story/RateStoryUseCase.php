@@ -2,6 +2,10 @@
 
 namespace Etpa\UseCases\Story;
 
+/**
+ * Class RateStoryUseCase
+ * @package Etpa\UseCases\Story
+ */
 class RateStoryUseCase
 {
     /**
@@ -15,7 +19,7 @@ class RateStoryUseCase
     }
 
     /**
-     * @param  CreateStoryRequest   $request
+     * @param  CreateStoryRequest  $request
      * @return CreateStoryResponse
      */
     public function execute($request)

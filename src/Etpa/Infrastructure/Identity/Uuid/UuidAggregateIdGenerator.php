@@ -1,11 +1,11 @@
 <?php
 
-namespace Etpa\Infrastructure\Identity;
+namespace Etpa\Infrastructure\Identity\Uuid;
 
 use Rhumsaa\Uuid\Uuid;
-use Etpa\Application\Identity\UuidGenerator as UuidGeneratorInterface;
+use Etpa\Application\Identity\AggregateIdGenerator;
 
-class UuidGenerator implements UuidGeneratorInterface
+class UuidAggregateIdGenerator implements AggregateIdGenerator
 {
     /**
      * @return string

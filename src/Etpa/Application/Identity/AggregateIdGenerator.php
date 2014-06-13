@@ -2,7 +2,7 @@
 
 namespace Etpa\Application\Identity;
 
-interface UuidGenerator
+interface AggregateIdGenerator
 {
     /**
      * @return string

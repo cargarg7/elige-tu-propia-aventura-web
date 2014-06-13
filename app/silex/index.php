@@ -26,6 +26,11 @@ $app->get('/stories', function () use ($app) {
     return $app['twig']->render('view-stories.html.twig', ['stories' => $response->stories]);
 })->bind('read');
 
+// Add story
+$app->get('/story/add', function () use ($app) {
+    return $app['twig']->render('add-story.html.twig');
+})->bind('add-story');
+
 // View story
 $app->get('/story/{id}', function ($id) use ($app) {
     $request = new \Etpa\UseCases\Story\ViewStoryRequest();
@@ -49,6 +54,18 @@ $app->get('/story/{storyId}/rating/{rating}', function ($storyId, $rating) use (
     return $app->redirect($app['url_generator']->generate('story', array('id' => $response->story->getId())));
 })->bind('rate-story');
 
+$app->post('/story/add', function (Request $httpRequest) use ($app) {
+    $request = new \Etpa\UseCases\Story\CreateStoryRequest();
+    $request->title = $httpRequest->get('title');
+    $request->description = $httpRequest->get('description');
+
+    $storyRepository = $app['em']->getRepository('Etpa\Domain\Story');
+    $usecase = new \Etpa\UseCases\Story\CreateStoryUseCase($storyRepository);
+    $response = $usecase->execute($request);
+
+    return $app->redirect('/stories');
+});
+
 // View page
 $app->get('/page/{id}', function ($id) use ($app) {
     $request = new \Etpa\UseCases\Page\ViewPageRequest();
@@ -64,22 +81,6 @@ $app->get('/page/{id}', function ($id) use ($app) {
 $app->get('/signup', function () use ($app) {
     return $app['twig']->render('signup.html.twig');
 })->bind('signup');
-
-$app->get('/story/add', function () use ($app) {
-    return $app['twig']->render('add-story.html.twig');
-})->bind('add-story');
-
-$app->post('/story/add', function (Request $httpRequest) use ($app) {
-    $request = new \Etpa\UseCases\Story\CreateStoryRequest();
-    $request->title = $httpRequest->get('title');
-    $request->description = $httpRequest->get('description');
-
-    $storyRepository = $app['em']->getRepository('Etpa\Domain\Story');
-    $usecase = new \Etpa\UseCases\Story\CreateStoryUseCase($storyRepository);
-    $response = $usecase->execute($request);
-
-    return $app->redirect('/stories');
-});
 
 $app->get('/my-played-stories', function () use ($app) {
     return $app['twig']->render('view-stories.html.twig', ['stories' => []]);

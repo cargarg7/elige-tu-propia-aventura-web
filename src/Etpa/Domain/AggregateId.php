@@ -2,7 +2,7 @@
 
 namespace Etpa\Domain;
 
-use Etpa\Infrastructure\Identity\UuidGenerator;
+use Etpa\Infrastructure\Identity\Uuid\UuidAggregateIdGenerator;
 
 /**
  * Class AggregateId
@@ -20,7 +20,7 @@ abstract class AggregateId
      */
     public function __construct($id = null)
     {
-        $this->id = $id ?: UuidGenerator::generate();
+        $this->id = $id ?: UuidAggregateIdGenerator::generate();
     }
 
     /**
