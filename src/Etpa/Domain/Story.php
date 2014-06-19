@@ -2,6 +2,7 @@
 
 namespace Etpa\Domain;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Etpa\Application\DomainEventPublisher;
 
 class Story
@@ -70,6 +71,7 @@ class Story
         $this->setStatus(StoryStatus::DRAFT);
         $this->setVotes(0);
         $this->setRating(null);
+        $this->setPages(new ArrayCollection());
     }
 
     /**
@@ -168,6 +170,11 @@ class Story
         return (float) ($this->rating / 100);
     }
 
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
     /**
      * @param \Etpa\Domain\Page $firstPage
      * @return $this
@@ -222,5 +229,13 @@ class Story
         $this->rating = $rating;
 
         return $this;
+    }
+
+    /**
+     * @param Page[] $pages
+     */
+    private function setPages($pages)
+    {
+        $this->pages = $pages;
     }
 }

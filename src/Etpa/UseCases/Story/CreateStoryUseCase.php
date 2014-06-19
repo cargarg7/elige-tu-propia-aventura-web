@@ -86,7 +86,7 @@ class CreateStoryUseCase
      */
     private function createResponse($story)
     {
-        $response = new CreateStoryResponse();
+        $response = new CreatePageResponse();
         $response->story = $story;
 
         return $response;

@@ -3,8 +3,8 @@
 {% block content %}
     <h1 class="cover-heading">Add story</h1>
     <form method="post">
-        Name: <input placeholder="Best story never told" name="title" type="text" maxlength="255" /><br/>
-        Description:<br/><textarea placeholder="Once upon a time..." name="description" type="text" maxlength="255"></textarea> <br/>
-        <input type="submit" value="Add">
+        Title: <input class="form-control" placeholder="Best story never told" name="title" type="text" maxlength="255" /><br/>
+        Introduction:<br/><textarea class="form-control" placeholder="Once upon a time..." name="description" type="text" maxlength="255"></textarea> <br/>
+        <button class="btn btn-default" type="submit">Submit</button>
     </form>
 {% endblock %}

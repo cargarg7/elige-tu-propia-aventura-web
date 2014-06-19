@@ -20,7 +20,7 @@ Etpa\Domain\Page:
   manyToOne:
     story:
       targetEntity: Etpa\Domain\Story
-      inversedBy: story
+      inversedBy: pages
       joinColumn:
         name: story_id
         referencedColumnName: id

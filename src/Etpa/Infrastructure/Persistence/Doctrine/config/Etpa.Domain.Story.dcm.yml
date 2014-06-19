@@ -22,5 +22,5 @@ Etpa\Domain\Story:
       type: integer
   oneToMany:
     pages:
-      targetEntity: Etpa\Domain\Action
+      targetEntity: Etpa\Domain\Page
       mappedBy: story
